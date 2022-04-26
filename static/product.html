@@ -45,7 +45,7 @@
   
 
 
-        <a href="localhost:7001/product"></a></a>
+        <a href="localhost:7002/product"></a></a>
 
     </head>
     <body>
@@ -59,9 +59,14 @@
   <div class="card-body">
     <h5 class="card-title">{{.products.Name}}</h5>
     <h5 class="card-title">Rs-{{.products.Price}}</h5>
+    <h5>{{.products.ID}}</h5>
     <p class="card-text">Perform its task effeciently,fast and durable.</p>
+  </button>
+  <a href="http://localhost:7002/update/cart/{{.products.ID}}" >Add to cart</a>
+</button>
+  
     
-    <a href="/login" class="btn btn-success float-end">Add to Cart</a>
+    <!-- <a href="localhost:7001/cart" class="btn btn-success float-end">Add to Cart</a> -->
     <!-- /cart/{{ .ID }} -->
   </div>
 </div>

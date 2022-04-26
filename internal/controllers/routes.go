@@ -12,7 +12,8 @@ func RouterHandler(s *Server) {
 			"message": "WELCOME",
 		})
 	})
-
+	r.GET("/remove/cart/:id", s.DeleteCart)
+	r.GET("/update/cart/:id", s.UpdateCart)
 	r.GET("/", s.Home)
 	r.GET("/login", s.Login)
 	r.GET("/login/Auth", s.LoginAuth)
@@ -21,9 +22,9 @@ func RouterHandler(s *Server) {
 	// r.GET("/signup", s.Signup)
 	// r.POST("/signuppost", s.SignupPost)
 	r.GET("/product/:id", s.Product)
-	r.GET("/carts/:id", s.MyCarts)
+	r.GET("/cart", s.MyCarts)
 	r.POST("/create", s.Create)
 	r.DELETE("/delete", s.Delete)
 
-	r.Run(":7001")
+	r.Run(":7002")
 }
