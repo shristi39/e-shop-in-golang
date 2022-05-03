@@ -9,15 +9,16 @@ import (
 
 type Product struct {
 	gorm.Model
-	Name   string
-	Price  int
-	Image  string
-	Status bool
+	Name        string
+	Price       int
+	Image       string
+	Status      bool
+	Description string
 }
 
-func Create(db *gorm.DB, name string, price int, image string) error {
+func Create(db *gorm.DB, name string, price int, image string, description string) error {
 
-	product := Product{Name: name, Price: price, Image: image, Status: false}
+	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false}
 	err := db.Model(&product).Create(&product).Error
 	if err != nil {
 		fmt.Println(err)
@@ -45,13 +46,25 @@ func FindProductById(db *gorm.DB, id int) (*Product, error) {
 	return &data, err
 }
 
-func FindProductByStatus(db *gorm.DB, status bool) (*[]Product, error) {
+func FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error) {
+	// fmt.Println("Heloo.............................")
 	data := []Product{}
 	err := db.Model(&data).Where("status = ?", status).Find(&data).Error
+	count := 0
+	db.Model(&data).Where("status = ?", status).Count(&count)
 	if err != nil {
-		return nil, err
+		return nil, nil, nil, err
 	}
-	return &data, err
+	sum := 0
+	for i, p := range data {
+		fmt.Println(i)
+		fmt.Println(p.Price)
+		sum = sum + p.Price
+
+	}
+	fmt.Println(sum)
+	return &data, &count, &sum, err
+
 }
 
 func Delete(db *gorm.DB, id int) error {
@@ -65,7 +78,7 @@ func Delete(db *gorm.DB, id int) error {
 }
 
 func Update(db *gorm.DB, status bool, id int) error {
-	// fmt.Println("Helllo I am inside Update")
+	fmt.Println("Helllo I am inside Update")
 	data := &Product{}
 	data, err := FindProductById(db, id)
 	// fmt.Println(id)

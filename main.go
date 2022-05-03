@@ -11,7 +11,6 @@ func main() {
 	db := Connectdb()
 	server := &controllers.Server{DB: db}
 	controllers.RouterHandler(server)
-
 }
 
 func Connectdb() *gorm.DB {

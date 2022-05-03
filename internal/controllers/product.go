@@ -33,7 +33,7 @@ func (s *Server) Product(c *gin.Context) {
 }
 func (s *Server) Create(c *gin.Context) {
 
-	err := models.Create(s.DB, "speaker", 11000, "https://media.istockphoto.com/photos/digital-background-smart-assistant-picture-id1320780003?s=612x612")
+	err := models.Create(s.DB, "Mouse", 500, "https://images.unsplash.com/photo-1551515300-2d3b7bb80920?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29tcHV0ZXIlMjBtb3VzZXxlbnwwfHwwfHw%3D&w=1000&q=80", "controls the motion of a pointer in two dimensions in a graphical user interface")
 
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{

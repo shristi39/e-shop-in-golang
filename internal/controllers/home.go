@@ -2,8 +2,11 @@ package controllers
 
 import (
 	"commerce/internal/models"
+	"fmt"
+
 	"net/http"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +19,20 @@ func (s *Server) Home(c *gin.Context) {
 		})
 		return
 	}
+	var status bool
+	sessionA := sessions.DefaultMany(c, "a")
+	user := sessionA.Get("user")
+	fmt.Println(user)
+	if user == "Guest" {
+		status = false
+	} else {
+		status = true
+	}
+	//email := sessionA.Get("email")
+	// fmt.Println(user)
 	c.HTML(http.StatusOK, "home.html", gin.H{
 		"products": products,
+		"user":     user,
+		"status":   status,
 	})
 }
