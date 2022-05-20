@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"commerce/internal/models"
 	"fmt"
 	"net/http"
 	"regexp"
@@ -60,7 +59,7 @@ func (s *Server) Register(c *gin.Context) {
 		return
 	}
 
-	err := models.Register(s.DB, name, email, password)
+	err := ecommerce.Register(s.DB, name, email, password)
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
 			"message": "unsuccessful",

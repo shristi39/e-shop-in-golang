@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <script>
-        function Validate(){
-          password = document.getElementById("pwd").value;
-          confirmpassword = document.getElementById("pwd1").value;
-          if(password != confirmpassword){
-            document.getElementById("pspan").innerHTML = "Password doesnot match";
-            return false;
-          }
-          document.getElementById("pspan").innerHTML="";
-          return true;
-        }
-      </script>
       
       
       
@@ -35,27 +23,46 @@
 
         </style>
 
+
+
     </head>
     <body>
       <body style="background-color: rgb(247, 246, 242);"></body>
       
-    <form action="/loginauth" method="post" class="loginForm" onsubmit="Validate()">
+    <form action="/product" method="post"  enctype="multipart/form-data"class="loginForm" >
       <div class="mx-auto  shristi form-box"  >
         <!-- <div class="ml-0.5 login-form"> -->
-          <h1><strong>welcome please login</strong></h1>
-          <label for="exampleInputEmail1" class="form-label"><strong>email</strong></label>
+          <h1><strong></strong></h1>
+          <label for="exampleproductname" class="form-label"><strong>Product Name</strong></label>
           
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-          <p >should be registered email </p>
+          <input type="Text" class="form-control" id="name" aria-describedby="producthelp" name="name">
+          <p > </p>
           
+          <div class="mx-auto " >
+            <label for="exampleInputdescription" class="form-label"><strong>Description</strong></label>
+            <input type="Text" class="form-control" id="description" aria-describedby="descriptionHelp" name="description">
+          
+        
+          
+        </div>
         
         <div class="mx-auto " >
-          <label for="exampleInputPassword1" class="form-label"><strong>password</strong></label>
+            <label for="exampleInputPrice" class="form-label"><strong>price</strong></label>
+            <input type="Text" class="form-control" id="price" aria-describedby="priceHelp" name="price">
+          
         
-          <input type="password" class="form-control" id="pwd" name="password">
+          
         </div>
+        <div class="mx-auto " >
+            <label for="text" class="form-label"><strong>Image</strong></label>
+          
+            <input type="file" class="form-control" id="image" aria-describedby="IMAGEHelp" name="image">
+           
+            
+          </div>
 
 
+      
         
         <button type="submit " class="btn btn-primary">Submit</button>
       </button>
@@ -64,7 +71,7 @@
       
        </div>
     </button>
-    
+   
       </form>
     </body>
 </html>

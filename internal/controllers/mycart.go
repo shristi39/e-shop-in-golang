@@ -1,28 +1,29 @@
 package controllers
 
 import (
-	"commerce/internal/models"
-	"fmt"
+
+	// "fmt"
 	"net/http"
 	"strconv"
 
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 func (s *Server) MyCarts(c *gin.Context) {
-	fmt.Println("i am inside cart")
-	id := c.Param("id")
-	Id, err := strconv.Atoi(id)
-	if err != nil {
-		return
-	}
+	// fmt.Println("i am inside cart")
+	// id := c.Param("id")
+	// Id, err := strconv.Atoi(id)
+	// if err != nil {
+	// 	return
+	// }
 
-	err = models.Update(s.DB, true, Id)
-	if err != nil {
-		return
-	}
+	// err = models.Update(s.DB, true, Id)
+	// if err != nil {
+	// 	return
+	// }
 
-	products, count, sum, err := models.FindProductByStatus(s.DB, true)
+	products, count, sum, err := shop.FindProductByStatus(s.DB, true)
 
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
@@ -35,32 +36,40 @@ func (s *Server) MyCarts(c *gin.Context) {
 		"count":    count,
 		"sum":      sum,
 	})
+
 }
 
 func (s *Server) UpdateCart(c *gin.Context) {
-	fmt.Println("Hellooooo i am inside update cart")
+	// fmt.Println("Hellooooo i am inside update cart")
 	id := c.Param("id")
 	// fmt.Println("........", id)
 	Id, err := strconv.Atoi(id)
+	sessionA := sessions.DefaultMany(c, "a")
+	if sessionA.Get("user") == "Guest" {
+		c.HTML(http.StatusOK, "login.html", gin.H{})
+	} else {
+		c.Redirect(307, "/")
+	}
 	if err != nil {
+
 		return
 	}
 
-	err = models.Update(s.DB, true, Id)
+	err = shop.Update(s.DB, true, Id)
 	if err != nil {
 		return
 	}
-	c.Redirect(301, "/mycart")
+	c.Redirect(302, "/")
 
 }
 
 func (s *Server) Checkout(c *gin.Context) {
-	//fmt.Println("Hellooooo i am inside update cart")
-	products, _, _, _ := models.FindProductByStatus(s.DB, true)
+	// fmt.Println("Hellooooo i am inside update cart")
+	products, _, _, _ := shop.FindProductByStatus(s.DB, true)
 	for _, product := range *products {
-		models.Update(s.DB, false, int(product.ID))
+		shop.Update(s.DB, false, int(product.ID))
 	}
 
-	c.Redirect(301, "/")
+	c.Redirect(302, "/")
 
 }

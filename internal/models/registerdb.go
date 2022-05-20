@@ -16,6 +16,18 @@ type User struct {
 	Password string
 }
 
+type userbase struct {
+}
+
+type UserModels interface {
+	Register(db *gorm.DB, name string, email string, password string) error
+	Login(db *gorm.DB, email string, password string) error
+}
+
+func InitializeRegisterModels() UserModels {
+	return &userbase{}
+}
+
 func Hash(pwd string) string {
 	h := sha1.New()
 	h.Write([]byte(pwd))
@@ -24,7 +36,7 @@ func Hash(pwd string) string {
 	return pass
 }
 
-func Register(db *gorm.DB, name string, email string, password string) error {
+func (d *userbase) Register(db *gorm.DB, name string, email string, password string) error {
 	Hashvalue := Hash(password)
 	fmt.Println("......login create .......", Hashvalue)
 	// Base64(password)
@@ -38,7 +50,7 @@ func Register(db *gorm.DB, name string, email string, password string) error {
 	return errors.New("email not exist")
 }
 
-func Login(db *gorm.DB, email string, password string) error {
+func (d *userbase) Login(db *gorm.DB, email string, password string) error {
 	Hashvalue := Hash(password)
 	fmt.Println("......................Auth............", Hashvalue)
 	user := User{}

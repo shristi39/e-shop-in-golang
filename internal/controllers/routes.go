@@ -8,15 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RouterHandler(s *Server) {
-	r := gin.Default()
+func (s *Server) RouterHandler() {
 
+	r := gin.Default()
+	//	r.SetTrustedProxies(nil)
+	//gin.SetMode(gin.ReleaseMode)
 	store := cookie.NewStore([]byte("secret"))
 	sessionNames := []string{"a"}
 	fmt.Println(sessionNames)
 	r.Use(sessions.SessionsMany(sessionNames, store))
 
 	r.LoadHTMLGlob("static/*.html") //we can load from anywhere
+	r.Static("/static", "./static")
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "WELCOME",
@@ -35,14 +38,15 @@ func RouterHandler(s *Server) {
 	// r.GET("/signup", s.Signup)
 	// r.POST("/signuppost", s.SignupPost)
 	r.GET("/product/:id", s.Product)
-	r.GET("/product/:id/cart", s.MyCarts)
+	r.GET("/product/:id/cart", s.UpdateCart)
 	r.GET("/checkout", s.Checkout)
-	r.POST("/checkout")
+	//r.POST("/checkout")
 	r.GET("/mycart", s.MyCarts)
-	r.POST("/product", s.Create)
+	r.GET("/addproduct", s.AddProduct)
+	r.GET("/product", s.Create)
 	r.PUT("/product/:id", s.Delete)
 	r.DELETE("/product/:id", s.Delete)
 	//r.GET("/hello", s.Check)
 
-	r.Run(":8000")
+	r.Run(":6001")
 }

@@ -14,11 +14,30 @@ type Product struct {
 	Image       string
 	Status      bool
 	Description string
+	User        bool
+	Email       string
 }
 
-func Create(db *gorm.DB, name string, price int, image string, description string) error {
+type databases struct{}
 
-	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false}
+//  here we make the interface inside which all the functions are defined
+type ProductModels interface {
+	Create(db *gorm.DB, name string, price int, image string, description string, email string) error
+	FindAllProduct(db *gorm.DB) ([]Product, error)
+	FindProductById(db *gorm.DB, id int) (*Product, error)
+	FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error)
+	Delete(db *gorm.DB, id int) error
+	Update(db *gorm.DB, status bool, id int) error
+}
+
+//  here we initialize the interface which has been defined above  there
+func InitializeProductModels() ProductModels {
+	return &databases{}
+}
+
+func (d *databases) Create(db *gorm.DB, name string, price int, image string, description string, email string) error {
+
+	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false, Email: email}
 	err := db.Model(&product).Create(&product).Error
 	if err != nil {
 		fmt.Println(err)
@@ -27,17 +46,17 @@ func Create(db *gorm.DB, name string, price int, image string, description strin
 	return nil
 }
 
-func FindAllProduct(db *gorm.DB) (*[]Product, error) {
+func (d *databases) FindAllProduct(db *gorm.DB) ([]Product, error) {
 	data := []Product{}
 	err := db.Model(&Product{}).Find(&data).Error
 	if err != nil {
 		return nil, err
 	}
-	return &data, nil
+	return data, nil
 
 }
 
-func FindProductById(db *gorm.DB, id int) (*Product, error) {
+func (d *databases) FindProductById(db *gorm.DB, id int) (*Product, error) {
 	data := Product{}
 	err := db.Model(&data).Where("id = ?", id).Take(&data).Error
 	if err != nil {
@@ -46,7 +65,7 @@ func FindProductById(db *gorm.DB, id int) (*Product, error) {
 	return &data, err
 }
 
-func FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error) {
+func (d *databases) FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error) {
 	// fmt.Println("Heloo.............................")
 	data := []Product{}
 	err := db.Model(&data).Where("status = ?", status).Find(&data).Error
@@ -67,7 +86,7 @@ func FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, erro
 
 }
 
-func Delete(db *gorm.DB, id int) error {
+func (d *databases) Delete(db *gorm.DB, id int) error {
 	Products := Product{}
 	err := db.Model(&Products).Where("id=?", id).Delete(&Products).Error
 	if err != nil {
@@ -77,10 +96,10 @@ func Delete(db *gorm.DB, id int) error {
 
 }
 
-func Update(db *gorm.DB, status bool, id int) error {
+func (d *databases) Update(db *gorm.DB, status bool, id int) error {
 	fmt.Println("Helllo I am inside Update")
 	data := &Product{}
-	data, err := FindProductById(db, id)
+	data, err := d.FindProductById(db, id)
 	// fmt.Println(id)
 	fmt.Println(data)
 	if err != nil {

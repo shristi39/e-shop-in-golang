@@ -10,7 +10,13 @@ import (
 func main() {
 	db := Connectdb()
 	server := &controllers.Server{DB: db}
-	controllers.RouterHandler(server)
+	//http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	server.RouterHandler()
+
+	// mux := http.NewServeMux()
+
+	// fs := http.FileServer(http.Dir("./static"))
+	// mux.Handle("/static/", http.StripPrefix("/static/", fs))
 }
 
 func Connectdb() *gorm.DB {
