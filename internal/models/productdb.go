@@ -18,27 +18,25 @@ type Product struct {
 	Email       string
 }
 
-type databases struct{}
-
 //  here we make the interface inside which all the functions are defined
-type ProductModels interface {
-	Create(db *gorm.DB, name string, price int, image string, description string, email string) error
-	FindAllProduct(db *gorm.DB) ([]Product, error)
-	FindProductById(db *gorm.DB, id int) (*Product, error)
-	FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error)
-	Delete(db *gorm.DB, id int) error
-	Update(db *gorm.DB, status bool, id int) error
-}
+// type ProductModels interface {
+// 	Create(db *gorm.DB, name string, price int, image string, description string, email string) error
+// 	FindAllProduct(db *gorm.DB) ([]Product, error)
+// 	FindProductById(db *gorm.DB, id int) (*Product, error)
+// 	FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error)
+// 	Delete(db *gorm.DB, id int) error
+// 	Update(db *gorm.DB, status bool, id int) error
+// }
 
 //  here we initialize the interface which has been defined above  there
-func InitializeProductModels() ProductModels {
-	return &databases{}
-}
+// func InitializeProductModels() ProductModels {
+// 	return &databases{}
+// }
 
-func (d *databases) Create(db *gorm.DB, name string, price int, image string, description string, email string) error {
+func (d *Repository) Create(name string, price int, image string, description string, email string) error {
 
 	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false, Email: email}
-	err := db.Model(&product).Create(&product).Error
+	err := d.DB.Model(&product).Create(&product).Error
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -46,9 +44,9 @@ func (d *databases) Create(db *gorm.DB, name string, price int, image string, de
 	return nil
 }
 
-func (d *databases) FindAllProduct(db *gorm.DB) ([]Product, error) {
+func (d *Repository) FindAllProduct() ([]Product, error) {
 	data := []Product{}
-	err := db.Model(&Product{}).Find(&data).Error
+	err := d.DB.Model(&Product{}).Find(&data).Error
 	if err != nil {
 		return nil, err
 	}
@@ -56,21 +54,21 @@ func (d *databases) FindAllProduct(db *gorm.DB) ([]Product, error) {
 
 }
 
-func (d *databases) FindProductById(db *gorm.DB, id int) (*Product, error) {
+func (d *Repository) FindProductById(id int) (*Product, error) {
 	data := Product{}
-	err := db.Model(&data).Where("id = ?", id).Take(&data).Error
+	err := d.DB.Model(&data).Where("id = ?", id).Take(&data).Error
 	if err != nil {
 		return nil, err
 	}
 	return &data, err
 }
 
-func (d *databases) FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *int, *int, error) {
+func (d *Repository) FindProductByStatus(status bool) (*[]Product, *int, *int, error) {
 	// fmt.Println("Heloo.............................")
 	data := []Product{}
-	err := db.Model(&data).Where("status = ?", status).Find(&data).Error
+	err := d.DB.Model(&data).Where("status = ?", status).Find(&data).Error
 	count := 0
-	db.Model(&data).Where("status = ?", status).Count(&count)
+	d.DB.Model(&data).Where("status = ?", status).Count(&count)
 	if err != nil {
 		return nil, nil, nil, err
 	}
@@ -86,9 +84,9 @@ func (d *databases) FindProductByStatus(db *gorm.DB, status bool) (*[]Product, *
 
 }
 
-func (d *databases) Delete(db *gorm.DB, id int) error {
+func (d *Repository) Delete(id int) error {
 	Products := Product{}
-	err := db.Model(&Products).Where("id=?", id).Delete(&Products).Error
+	err := d.DB.Model(&Products).Where("id=?", id).Delete(&Products).Error
 	if err != nil {
 		return err
 	}
@@ -96,10 +94,10 @@ func (d *databases) Delete(db *gorm.DB, id int) error {
 
 }
 
-func (d *databases) Update(db *gorm.DB, status bool, id int) error {
+func (d *Repository) Update(status bool, id int) error {
 	fmt.Println("Helllo I am inside Update")
 	data := &Product{}
-	data, err := d.FindProductById(db, id)
+	data, err := d.FindProductById(id)
 	// fmt.Println(id)
 	fmt.Println(data)
 	if err != nil {
@@ -107,7 +105,7 @@ func (d *databases) Update(db *gorm.DB, status bool, id int) error {
 		return err
 	}
 	data.Status = status
-	err = db.Model(&data).Save(&data).Error
+	err = d.DB.Model(&data).Save(&data).Error
 	if err != nil {
 		fmt.Println(err)
 		return err

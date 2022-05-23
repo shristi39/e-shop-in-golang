@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"commerce/internal/models"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"
@@ -9,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var ecommerce = models.InitializeRegisterModels()
+// var ecommerce = models.InitializeRegisterModels()
 
 func (s *Server) Login(c *gin.Context) {
 	// fmt.Println("I am inside login")
@@ -35,7 +34,7 @@ func (s *Server) LoginAuth(c *gin.Context) {
 	//confirm := c.PostForm("confirmpassword")
 	// fmt.Println("i am inside login")
 
-	err := ecommerce.Login(s.DB, email, password)
+	err := s.R.Login(email, password)
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
 			"message": "unsuccessful",

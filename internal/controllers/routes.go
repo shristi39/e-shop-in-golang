@@ -43,10 +43,10 @@ func (s *Server) RouterHandler() {
 	//r.POST("/checkout")
 	r.GET("/mycart", s.MyCarts)
 	r.GET("/addproduct", s.AddProduct)
-	r.GET("/product", s.Create)
+	r.POST("/product", s.Create)
 	r.PUT("/product/:id", s.Delete)
 	r.DELETE("/product/:id", s.Delete)
 	//r.GET("/hello", s.Check)
 
-	r.Run(":6001")
+	r.Run(":7001")
 }

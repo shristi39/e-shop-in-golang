@@ -8,18 +8,19 @@ import (
 
 type Server struct {
 	DB *gorm.DB
+	R  models.Store
 }
 
-func NewServer(store Store) (*Server, error) {
+func NewServer(store models.Store) (*Server, error) {
 	server := &Server{
 		//db: store,
 	}
 	return server, nil
 }
 
-type Store interface {
-	models.ProductModels
-}
+// type Store interface {
+// 	models.ProductModels
+// }
 
 // func NewBaseHandler(pm models.ProductModels, um models.UserModels) *Server {
 // 	return &Server{

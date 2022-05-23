@@ -9,7 +9,8 @@ import (
 
 func main() {
 	db := Connectdb()
-	server := &controllers.Server{DB: db}
+	r := models.NewRepository(db)
+	server := &controllers.Server{DB: db, R: r}
 	//http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	server.RouterHandler()
 

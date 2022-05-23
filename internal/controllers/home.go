@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"commerce/internal/models"
 	"fmt"
 	"net/http"
 
@@ -9,13 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var shop = models.InitializeProductModels()
+// var shop = models.InitializeProductModels()
 
 func (s *Server) Home(c *gin.Context) {
-	shop.FindProductByStatus(s.DB, true)
+	s.R.FindProductByStatus(true)
 	fmt.Println("i am inside home")
-	_, count, _, _ := shop.FindProductByStatus(s.DB, true)
-	products, err := shop.FindAllProduct(s.DB)
+	_, count, _, _ := s.R.FindProductByStatus(true)
+	products, err := s.R.FindAllProduct()
 
 	//p := append(*products, models.Product{Name: "test", Price: 235}
 	if err != nil {

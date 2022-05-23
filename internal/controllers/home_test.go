@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"commerce/internal/controllers/mockdb"
-
 	"commerce/internal/models"
 	"errors"
 	"testing"
@@ -13,10 +12,9 @@ import (
 
 func intptr(i int) *int {
 	return &i
-
 }
 
-func NewTestServer(t *testing.T, store Store) *Server {
+func NewTestServer(t *testing.T, store models.Store) *Server {
 	server, err := NewServer(store)
 	require.NoError(t, err)
 	return server

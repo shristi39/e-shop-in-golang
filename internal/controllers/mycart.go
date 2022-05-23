@@ -23,7 +23,7 @@ func (s *Server) MyCarts(c *gin.Context) {
 	// 	return
 	// }
 
-	products, count, sum, err := shop.FindProductByStatus(s.DB, true)
+	products, count, sum, err := s.R.FindProductByStatus(true)
 
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
@@ -55,7 +55,7 @@ func (s *Server) UpdateCart(c *gin.Context) {
 		return
 	}
 
-	err = shop.Update(s.DB, true, Id)
+	err = s.R.Update(true, Id)
 	if err != nil {
 		return
 	}
@@ -65,9 +65,9 @@ func (s *Server) UpdateCart(c *gin.Context) {
 
 func (s *Server) Checkout(c *gin.Context) {
 	// fmt.Println("Hellooooo i am inside update cart")
-	products, _, _, _ := shop.FindProductByStatus(s.DB, true)
+	products, _, _, _ := s.R.FindProductByStatus(true)
 	for _, product := range *products {
-		shop.Update(s.DB, false, int(product.ID))
+		s.R.Update(false, int(product.ID))
 	}
 
 	c.Redirect(302, "/")

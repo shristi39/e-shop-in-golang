@@ -16,17 +16,17 @@ type User struct {
 	Password string
 }
 
-type userbase struct {
-}
+// type userbase struct {
+// }
 
-type UserModels interface {
-	Register(db *gorm.DB, name string, email string, password string) error
-	Login(db *gorm.DB, email string, password string) error
-}
+// type UserModels interface {
+// 	Register(db *gorm.DB, name string, email string, password string) error
+// 	Login(db *gorm.DB, email string, password string) error
+// }
 
-func InitializeRegisterModels() UserModels {
-	return &userbase{}
-}
+// func InitializeRegisterModels() UserModels {
+// 	return &userbase{}
+// }
 
 func Hash(pwd string) string {
 	h := sha1.New()
@@ -36,25 +36,25 @@ func Hash(pwd string) string {
 	return pass
 }
 
-func (d *userbase) Register(db *gorm.DB, name string, email string, password string) error {
+func (d *Repository) Register(name string, email string, password string) error {
 	Hashvalue := Hash(password)
 	fmt.Println("......login create .......", Hashvalue)
 	// Base64(password)
 	user := User{Name: name, Email: email, Password: Hashvalue}
-	err := db.Model(&user).Where("email = ?", email).Find(&user).Error
+	err := d.DB.Model(&user).Where("email = ?", email).Find(&user).Error
 	fmt.Println(err)
 	if err != nil {
-		db.Model(&user).Create(&user)
+		d.DB.Model(&user).Create(&user)
 		return nil
 	}
 	return errors.New("email not exist")
 }
 
-func (d *userbase) Login(db *gorm.DB, email string, password string) error {
+func (d *Repository) Login(email string, password string) error {
 	Hashvalue := Hash(password)
 	fmt.Println("......................Auth............", Hashvalue)
 	user := User{}
-	err := db.Model(&user).Where("email = ?", email).Where("password=?", Hashvalue).Find(&user).Error
+	err := d.DB.Model(&user).Where("email = ?", email).Where("password=?", Hashvalue).Find(&user).Error
 
 	if err != nil {
 		return err

@@ -20,7 +20,7 @@ func (s *Server) Product(c *gin.Context) {
 	}
 
 	// fmt.Println(id)
-	product, err := shop.FindProductById(s.DB, Id)
+	product, err := s.R.FindProductById(Id)
 
 	log.Println(product)
 	if err != nil {
@@ -62,7 +62,7 @@ func (s *Server) Create(c *gin.Context) {
 	email := fmt.Sprintf("%v", data)
 
 	Id, err := strconv.Atoi(price)
-
+	fmt.Println("Hello from create")
 	if err != nil {
 
 		c.HTML(http.StatusOK, "error.html", gin.H{
@@ -70,7 +70,7 @@ func (s *Server) Create(c *gin.Context) {
 		})
 		return
 	}
-	err = shop.Create(s.DB, name, Id, image, description, email)
+	err = s.R.Create(name, Id, image, description, email)
 
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
@@ -90,7 +90,7 @@ func (s *Server) Delete(c *gin.Context) {
 		})
 		return
 	}
-	err = shop.Delete(s.DB, id)
+	err = s.R.Delete(id)
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
 			"message": err.Error(),

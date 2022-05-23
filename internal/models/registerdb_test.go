@@ -19,7 +19,7 @@ func TestRegisterUserModel(t *testing.T) {
 	server.Mock.ExpectCommit()
 	server.Mock.ExpectBegin()
 	server.Mock.MatchExpectationsInOrder(false)
-	err := server.ustore.Register(server.DB, user.Name, user.Email, user.Password)
+	err := server.Store.Register(user.Name, user.Email, user.Password)
 	fmt.Println()
 	if err != nil {
 		t.Errorf("The error is creating the item: %v\n", err)
@@ -37,7 +37,7 @@ func TestLoginUserModel(t *testing.T) {
 	server.Mock.ExpectCommit()
 	server.Mock.ExpectBegin()
 	server.Mock.MatchExpectationsInOrder(false)
-	err := server.ustore.Login(server.DB, user.Email, user.Password)
+	err := server.Store.Login(user.Email, user.Password)
 	fmt.Println()
 	if err != nil {
 		t.Errorf("The error is creating the item: %v\n", err)
