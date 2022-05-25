@@ -14,10 +14,10 @@ import (
 
 func (s *Server) Product(c *gin.Context) {
 	id := c.Param("id")
-	Id, err := strconv.Atoi(id)
-	if err != nil {
-		return
-	}
+	Id, _ := strconv.Atoi(id)
+	// if err != nil {
+	// 	return
+	// }
 
 	// fmt.Println(id)
 	product, err := s.R.FindProductById(Id)

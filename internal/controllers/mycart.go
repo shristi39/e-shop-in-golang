@@ -11,17 +11,6 @@ import (
 )
 
 func (s *Server) MyCarts(c *gin.Context) {
-	// fmt.Println("i am inside cart")
-	// id := c.Param("id")
-	// Id, err := strconv.Atoi(id)
-	// if err != nil {
-	// 	return
-	// }
-
-	// err = models.Update(s.DB, true, Id)
-	// if err != nil {
-	// 	return
-	// }
 
 	products, count, sum, err := s.R.FindProductByStatus(true)
 

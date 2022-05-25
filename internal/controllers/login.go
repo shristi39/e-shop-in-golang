@@ -17,23 +17,10 @@ func (s *Server) Login(c *gin.Context) {
 
 }
 
-func (s *Server) CheckLogin(c *gin.Context) {
-	// fmt.Println("I am inside CHeck Login")
-	sessionA := sessions.DefaultMany(c, "a")
-	if sessionA.Get("user") == "Guest" {
-		c.HTML(http.StatusOK, "login.html", gin.H{})
-	} else {
-		c.Redirect(307, "/")
-	}
-}
-
 func (s *Server) LoginAuth(c *gin.Context) {
 
 	email := c.PostForm("email")
 	password := c.PostForm("password")
-	//confirm := c.PostForm("confirmpassword")
-	// fmt.Println("i am inside login")
-
 	err := s.R.Login(email, password)
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{

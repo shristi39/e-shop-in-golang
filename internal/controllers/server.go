@@ -13,8 +13,9 @@ type Server struct {
 
 func NewServer(store models.Store) (*Server, error) {
 	server := &Server{
-		//db: store,
+		R: store,
 	}
+	// server.RouterHandler()
 	return server, nil
 }
 

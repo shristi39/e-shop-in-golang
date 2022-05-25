@@ -65,7 +65,7 @@ func TestCreateProductModel(t *testing.T) {
 		t.Errorf("The error is creating the item: %v\n", err)
 		return
 	}
-	err = server.Store.Create(Product.Name, Product.Price, Product.Image, Product.Email, Product.Description)
+	// err = server.Store.Create(Product.Name, Product.Price, Product.Image, Product.Email, Product.Description)
 }
 func TestFindProductById(t *testing.T) {
 	Item := &Product{
