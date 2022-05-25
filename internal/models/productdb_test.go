@@ -41,6 +41,7 @@ func Database() {
 		fmt.Printf("Cannot connect to mock %s database\n", TestDbDriver)
 		log.Fatal("This is the error:", err)
 	}
+	server.Store = NewRepository(server.DB)
 	// server.ustore = InitializeRegisterModels()
 	// server.store = InitializeProductModels()
 }
@@ -50,7 +51,7 @@ func TestCreateProductModel(t *testing.T) {
 		Name:        "product name ",
 		Price:       66677,
 		Image:       "product image",
-		Email:       "  user email ",
+		Email:       " user email ",
 		Description: "product description",
 	}
 	data := server.Mock.ExpectQuery(regexp.QuoteMeta(

@@ -55,7 +55,7 @@ func TestRegister(t *testing.T) {
 	//shop = cstore
 	server := NewTestServer(t, nil)
 	fmt.Println(server)
-	req, err := http.NewRequest("POST", "/", nil)
+	req, err := http.NewRequest("POST", "/register", nil)
 	assert.NoError(t, err)
 	res := httptest.NewRecorder()
 	server.RouterHandler().ServeHTTP(res, req)

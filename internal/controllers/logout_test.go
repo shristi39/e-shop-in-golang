@@ -10,6 +10,7 @@ import (
 )
 
 func TestLogout(t *testing.T) {
+
 	server := NewTestServer(t, nil)
 	fmt.Println(server)
 	req, err := http.NewRequest("GET", "/logout", nil)
