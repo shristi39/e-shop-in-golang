@@ -11,6 +11,19 @@ type Server struct {
 	R  models.Store
 }
 
+type user struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+type product struct {
+	Id          string `json:"id"`
+	Image       string `json:"image"`
+	Description string `json:"description"`
+	Price       int    `json:"price"`
+	Email       string `json:"email"`
+}
+
 func NewServer(store models.Store) (*Server, error) {
 	server := &Server{
 		R: store,

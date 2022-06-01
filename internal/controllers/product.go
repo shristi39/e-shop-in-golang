@@ -20,6 +20,14 @@ func (s *Server) Product(c *gin.Context) {
 	// }
 
 	// fmt.Println(id)
+	Product := &product{}
+	err := c.ShouldBindJSON(&Product)
+	if err != nil {
+		c.JSON(http.StatusUnprocessableEntity, err.Error())
+		// fmt.Println("i am inside home")
+		return
+	}
+
 	product, err := s.R.FindProductById(Id)
 
 	log.Println(product)
@@ -43,6 +51,34 @@ func (s *Server) Product(c *gin.Context) {
 		"status":   status,
 	})
 }
+func (s *Server) RestProduct(c *gin.Context) {
+	id := c.Param("id")
+	Id, _ := strconv.Atoi(id)
+	// Product := &product{}
+
+	product, err := s.R.FindProductById(Id)
+	fmt.Println(id)
+	log.Println(product)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "this is error",
+		})
+		return
+
+	}
+
+	//	log.Println(Product)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"error": "this is an error",
+		})
+
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"products": product,
+	})
+}
 
 func (s *Server) AddProduct(c *gin.Context) {
 	// fmt.Println("i am inside add")
@@ -50,9 +86,7 @@ func (s *Server) AddProduct(c *gin.Context) {
 	c.HTML(http.StatusOK, "user.html", gin.H{})
 }
 func (s *Server) Create(c *gin.Context) {
-	// fmt.Println("i am inside create product")
 
-	//err := models.Create(s.DB, "Mouse", 500, "https://images.unsplash.com/photo-1551515300-2d3b7bb80920?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29tcHV0ZXIlMjBtb3VzZXxlbnwwfHwwfHw%3D&w=1000&q=80", "controls the motion of a pointer in two dimensions in a graphical user interface")
 	sessionA := sessions.DefaultMany(c, "a")
 	data := sessionA.Get("user")
 	image := c.PostForm("image")
@@ -81,20 +115,61 @@ func (s *Server) Create(c *gin.Context) {
 
 }
 
+func (s *Server) RestCreate(c *gin.Context) {
+	Product := &product{}
+	err := c.ShouldBindJSON(&Product)
+	if err != nil {
+		c.JSON(http.StatusUnprocessableEntity, gin.H{
+			"error": err,
+		})
+
+		return
+	}
+	err = s.R.Create(Product.Id, Product.Price, Product.Image, Product.Description, Product.Email)
+
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"message": err.Error(),
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "successfull",
+	})
+}
+
 func (s *Server) Delete(c *gin.Context) {
-	Id := c.Request.URL.Query().Get("id")
+	Id := c.Param("id")
 	id, err := strconv.Atoi(Id)
 	if err != nil {
-		c.HTML(http.StatusOK, "error.html", gin.H{
+		return
+	}
+	err = s.R.Delete(id)
+	if err != nil {
+		c.HTML(http.StatusInternalServerError, "error.html", gin.H{
 			"message": err.Error(),
+		})
+		return
+	}
+}
+
+func (s *Server) RestDelete(c *gin.Context) {
+	Id := c.Param("id")
+	fmt.Println(Id)
+	id, err := strconv.Atoi(Id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"error": err.Error(),
 		})
 		return
 	}
 	err = s.R.Delete(id)
 	if err != nil {
-		c.HTML(http.StatusOK, "error.html", gin.H{
-			"message": err.Error(),
+		c.JSON(http.StatusOK, gin.H{
+			"error": err.Error(),
 		})
 		return
 	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "succesful",
+	})
 }

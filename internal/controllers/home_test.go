@@ -57,7 +57,7 @@ func TestHome(t *testing.T) {
 			defer mockCtrl.Finish()
 			cstore := mockdb.NewMockStore(mockCtrl)
 			tc.setCreateItem(cstore)
-			//shop = cstore
+			// shop = cstore
 			server := NewTestServer(t, cstore)
 			fmt.Println(server)
 			req, err := http.NewRequest("GET", "/", nil)
@@ -66,5 +66,7 @@ func TestHome(t *testing.T) {
 			server.RouterHandler().ServeHTTP(res, req)
 
 		})
+
 	}
+
 }

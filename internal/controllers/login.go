@@ -36,3 +36,28 @@ func (s *Server) LoginAuth(c *gin.Context) {
 	}
 
 }
+
+// func (s *Server) RestLoginAuth(c *gin.Context) {
+
+// 	User := &user{}
+// 	err := c.ShouldBindJSON(&User)
+// 	if err != nil {
+// 		c.JSON(http.StatusUnprocessableEntity, gin.H{
+// 			"error": "error",
+// 		})
+// 		return
+// 	}
+// 	err = s.R.Login(User.Email, User.Password)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{
+// 			"error": "error",
+// 		})
+// 		return
+
+// 	} else {
+// 		c.JSON(http.StatusOK, gin.H{
+// 			"login": "successfull",
+// 		})
+// 	}
+
+// }

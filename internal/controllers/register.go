@@ -15,7 +15,9 @@ func (s *Server) Registerhtml(c *gin.Context) {
 }
 
 func (s *Server) Register(c *gin.Context) {
+	fmt.Println("formsdddddddddddd")
 	name := c.PostForm("name")
+	fmt.Println("forms", name)
 	email := c.PostForm("email")
 	password := c.PostForm("password")
 
@@ -35,31 +37,31 @@ func (s *Server) Register(c *gin.Context) {
 		}
 	}
 
-	fmt.Println(match1)
+	// fmt.Println(match1)
 	if !match1 {
 		c.HTML(http.StatusOK, "register.html", gin.H{
 			"namemessage": "invalid name",
 		})
-		return
+		// return
 	}
 
-	fmt.Println(match2)
+	// fmt.Println(match2)
 	if !match2 {
 		c.HTML(http.StatusOK, "register.html", gin.H{
 			"emailmessage": "Invalid email",
 		})
-		return
+		// return
 	}
 
-	fmt.Println(secure)
+	// fmt.Println(secure)
 	if !secure {
 		c.HTML(http.StatusOK, "register.html", gin.H{
 			"passwordmessage": "at least 8 characters at least one upper case character at least one lower case  at least one number at least one unique character",
 		})
-		return
+		// return
 	}
-
 	err := s.R.Register(name, email, password)
+
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
 			"message": "unsuccessful",

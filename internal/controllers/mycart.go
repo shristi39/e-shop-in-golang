@@ -3,6 +3,7 @@ package controllers
 import (
 
 	// "fmt"
+
 	"net/http"
 	"strconv"
 
@@ -60,5 +61,30 @@ func (s *Server) Checkout(c *gin.Context) {
 	}
 
 	c.Redirect(302, "/")
+
+}
+
+func (s *Server) RestCheckout(c *gin.Context) {
+	products, err, _, _ := s.R.FindProductByStatus(true)
+
+	for _, product := range *products {
+		s.R.Update(false, int(product.ID))
+
+		if err != nil {
+			c.JSON(http.StatusUnprocessableEntity, gin.H{
+				"error": err,
+			})
+			return
+
+		}
+		// fmt.Println("jfdnhjghijfgh")
+		// if err != nil {
+		// 	c.JSON(http.StatusOK, gin.H{
+		// 		"message": "error",
+		// 	})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"message": "successfull",
+	})
 
 }

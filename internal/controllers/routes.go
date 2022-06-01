@@ -22,7 +22,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 	fmt.Println(sessionNames)
 	r.Use(sessions.SessionsMany(sessionNames, store))
 
-	// r.LoadHTMLGlob("../static/*.html") //we can load from anywhere
+	r.LoadHTMLGlob("static/*.html") //we can load from anywhere
 	r.Static("/static", "./static")
 
 	r.GET("/ping", func(c *gin.Context) {
@@ -30,11 +30,12 @@ func (s *Server) RouterHandler() *gin.Engine {
 			"message": "WELCOME",
 		})
 	})
-
+	// r.GET("/rest/", s.RestHome)
 	r.GET("/", s.Home)
 	r.GET("/logout", s.Logout)
 	r.GET("/login", s.Login)
 	r.POST("/loginauth", s.LoginAuth)
+	// r.POST("/rest/loginauth/", s.RestLoginAuth)
 
 	r.GET("/register", s.Registerhtml)
 	r.POST("/register", s.Register)
@@ -43,11 +44,20 @@ func (s *Server) RouterHandler() *gin.Engine {
 	r.GET("/checkout", s.Checkout)
 	r.GET("/mycart", s.MyCarts)
 	r.GET("/addproduct", s.AddProduct)
-	r.POST("/product", s.Create)
-	r.PUT("/product/:id", s.Delete)
+	r.POST("/create", s.Create)
 	r.DELETE("/product/:id", s.Delete)
 
-	r.Run(":7000")
+	// rest API
+
+	r.GET("/rest/product/:id", s.RestProduct)
+	r.POST("/rest/create", s.RestCreate)
+	r.PUT("/rest/product/:id", s.RestDelete)
+	r.GET("/rest/checkout", s.RestCheckout)
+	// r.POST("/rest/product/:id", s.RestLoginAuth)
+
+	//  sabaie rest api ko yeha hunxa ,,,,,,,,login ko register product id ko get post ra put matra hunxa and checkout matra ho chaiyene ab
+
+	r.Run(":8001")
 
 	return r
 }
