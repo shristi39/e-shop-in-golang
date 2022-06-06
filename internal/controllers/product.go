@@ -87,13 +87,12 @@ func (s *Server) AddProduct(c *gin.Context) {
 }
 func (s *Server) Create(c *gin.Context) {
 
-	sessionA := sessions.DefaultMany(c, "a")
-	data := sessionA.Get("user")
+	// sessionA := sessions.DefaultMany(c, "a")
+	// data := sessionA.Get("user")
 	image := c.PostForm("image")
 	name := c.PostForm("name")
 	description := c.PostForm("Description")
 	price := c.PostForm("price")
-	email := fmt.Sprintf("%v", data)
 
 	Id, err := strconv.Atoi(price)
 	fmt.Println("Hello from create")
@@ -104,7 +103,7 @@ func (s *Server) Create(c *gin.Context) {
 		})
 		return
 	}
-	err = s.R.Create(name, Id, image, description, email)
+	err = s.R.Create(name, Id, image, description)
 
 	if err != nil {
 		c.HTML(http.StatusOK, "error.html", gin.H{
@@ -125,7 +124,7 @@ func (s *Server) RestCreate(c *gin.Context) {
 
 		return
 	}
-	err = s.R.Create(Product.Id, Product.Price, Product.Image, Product.Description, Product.Email)
+	err = s.R.Create(Product.Name, Product.Price, Product.Image, Product.Description)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

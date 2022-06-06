@@ -34,6 +34,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 	r.GET("/", s.Home)
 	r.GET("/logout", s.Logout)
 	r.GET("/login", s.Login)
+	r.POST("/rest/login", s.RestLogin)
 	r.POST("/loginauth", s.LoginAuth)
 	// r.POST("/rest/loginauth/", s.RestLoginAuth)
 

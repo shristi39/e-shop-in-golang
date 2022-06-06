@@ -3,7 +3,7 @@ package models
 import "github.com/jinzhu/gorm"
 
 type Store interface {
-	Create(name string, Price int, image string, description string, email string) error
+	Create(name string, Price int, image string, description string) error
 	FindAllProduct() ([]Product, error)
 	FindProductById(id int) (*Product, error)
 	FindProductByStatus(status bool) (*[]Product, *int, *int, error)

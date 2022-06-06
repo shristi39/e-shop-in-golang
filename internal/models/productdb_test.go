@@ -60,7 +60,7 @@ func TestCreateProductModel(t *testing.T) {
 	server.Mock.ExpectCommit()
 	server.Mock.ExpectBegin()
 	server.Mock.MatchExpectationsInOrder(false)
-	err := server.Store.Create(Product.Name, Product.Price, Product.Image, Product.Email, Product.Description)
+	err := server.Store.Create(Product.Name, Product.Price, Product.Image, Product.Description)
 	fmt.Println()
 	if err != nil {
 		t.Errorf("The error is creating the item: %v\n", err)

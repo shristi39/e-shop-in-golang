@@ -46,7 +46,7 @@ func TestMyCarts(t *testing.T) {
 			cstore := mockdb.NewMockStore(mockCtrl)
 			tc.setCreateItem(cstore)
 			// 		//shop = cstore
-			server := NewTestServer(t, cstore)
+			server := NewTestServer(t, nil)
 			fmt.Println(server)
 			req, err := http.NewRequest("GET", "/mycart", nil)
 			assert.NoError(t, err)
@@ -93,7 +93,7 @@ func TestCheckout(t *testing.T) {
 			cstore := mockdb.NewMockStore(mockCtrl)
 			tc.setCreateItem(cstore)
 			//shop = cstore
-			server := NewTestServer(t, cstore)
+			server := NewTestServer(t, nil)
 			fmt.Println(server)
 			req, err := http.NewRequest("GET", "/checkout", nil)
 			assert.NoError(t, err)

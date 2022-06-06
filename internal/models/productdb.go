@@ -33,9 +33,9 @@ type Product struct {
 // 	return &databases{}
 // }
 
-func (d *Repository) Create(name string, price int, image string, description string, email string) error {
+func (d *Repository) Create(name string, price int, image string, description string) error {
 
-	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false, Email: email}
+	product := Product{Name: name, Price: price, Image: image, Description: description, Status: false}
 	err := d.DB.Model(&product).Create(&product).Error
 	if err != nil {
 		fmt.Println(err)

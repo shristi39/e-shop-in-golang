@@ -18,10 +18,12 @@ type user struct {
 }
 type product struct {
 	Id          string `json:"id"`
+	Name        string `json:"name"`
 	Image       string `json:"image"`
 	Description string `json:"description"`
 	Price       int    `json:"price"`
-	Email       string `json:"email"`
+
+	Email string `json:"email"`
 }
 
 func NewServer(store models.Store) (*Server, error) {

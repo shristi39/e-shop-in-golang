@@ -70,7 +70,7 @@ func TestLoginAuth(t *testing.T) {
 			assert.NoError(t, err)
 			tc.setCreateItem(cstore)
 			// 		//shop = cstore
-			server := NewTestServer(t, cstore)
+			server := NewTestServer(t, nil)
 			fmt.Println(server)
 			req, err := http.NewRequest("POST", "/loginauth", bytes.NewReader(data))
 			assert.NoError(t, err)

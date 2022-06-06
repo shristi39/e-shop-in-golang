@@ -58,7 +58,7 @@ func TestHome(t *testing.T) {
 			cstore := mockdb.NewMockStore(mockCtrl)
 			tc.setCreateItem(cstore)
 			// shop = cstore
-			server := NewTestServer(t, cstore)
+			server := NewTestServer(t, nil)
 			fmt.Println(server)
 			req, err := http.NewRequest("GET", "/", nil)
 			assert.NoError(t, err)

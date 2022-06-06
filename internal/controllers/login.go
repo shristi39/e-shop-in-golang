@@ -16,6 +16,12 @@ func (s *Server) Login(c *gin.Context) {
 	c.HTML(http.StatusOK, "login.html", gin.H{})
 
 }
+func (s *Server) RestLogin(c *gin.Context) {
+	// fmt.Println("I am inside login")
+
+	c.HTML(http.StatusOK, "login.html", gin.H{})
+
+}
 
 func (s *Server) LoginAuth(c *gin.Context) {
 
