@@ -26,7 +26,7 @@ func (s *Server) Register(c *gin.Context) {
 
 	match1, _ := regexp.MatchString(namepattern, name)
 	match2, _ := regexp.MatchString(emailpattern, email)
-
+	fmt.Println("formsdddddddddddd")
 	secure := true
 	tests := []string{".{7,}", "[a-z]", "[A-Z]", "[0-9]", "[^\\d\\w]"}
 	for _, test := range tests {

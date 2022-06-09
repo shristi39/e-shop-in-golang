@@ -32,9 +32,10 @@ func (s *Server) RouterHandler() *gin.Engine {
 	})
 	// r.GET("/rest/", s.RestHome)
 	r.GET("/", s.Home)
+	r.POST("/user/login", s.loginUser)
 	r.GET("/logout", s.Logout)
-	r.GET("/login", s.Login)
-	r.POST("/rest/login", s.RestLogin)
+	//r.GET("/login", s.Login)
+	//r.POST("/rest/login", s.RestLogin)
 	r.POST("/loginauth", s.LoginAuth)
 	// r.POST("/rest/loginauth/", s.RestLoginAuth)
 
@@ -47,7 +48,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 	r.GET("/addproduct", s.AddProduct)
 	r.POST("/create", s.Create)
 	r.DELETE("/product/:id", s.Delete)
-
+	// r.POST("/create", s.CreateToken)
 	// rest API
 
 	r.GET("/rest/product/:id", s.RestProduct)
