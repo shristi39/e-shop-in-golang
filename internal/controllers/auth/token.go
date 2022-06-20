@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"errors"
+	"fmt"
 	"os"
 	"time"
 
@@ -41,34 +43,34 @@ func (j *JwtWrapper) GenerateToken(email string) (signedToken string, err error)
 	return
 }
 
-//ValidateToken validates the jwt token
-// func (j *JwtWrapper) ValidateToken(signedToken string) (claims *JwtClaim, err error) {
-// 	token, err := jwt.ParseWithClaims(
-// 		signedToken,
-// 		&JwtClaim{},
-// 		func(token *jwt.Token) (interface{}, error) {
-// 			return []byte(j.SecretKey), nil
-// 		},
-// 	)
-// 	fmt.Println("aaaa", token)
-// 	if err != nil {
-// 		return
-// 	}
+// ValidateToken validates the jwt token
+func (j *JwtWrapper) ValidateToken(signedToken string) (claims *JwtClaim, err error) {
+	token, err := jwt.ParseWithClaims(
+		signedToken,
+		&JwtClaim{},
+		func(token *jwt.Token) (interface{}, error) {
+			return []byte(j.SecretKey), nil
+		},
+	)
+	fmt.Println("aaaa", token)
+	if err != nil {
+		return
+	}
 
-// 	claims, ok := token.Claims.(*JwtClaim)
-// 	if !ok {
-// 		err = errors.New("Couldn't parse claims")
-// 		return
-// 	}
+	claims, ok := token.Claims.(*JwtClaim)
+	if !ok {
+		err = errors.New("Couldn't parse claims")
+		return
+	}
 
-// 	if claims.ExpiresAt < time.Now().Local().Unix() {
-// 		err = errors.New("JWT is expired")
-// 		return
-// 	}
+	if claims.ExpiresAt < time.Now().Local().Unix() {
+		err = errors.New("JWT is expired")
+		return
+	}
 
-// 	return
+	return
 
-// }
+}
 
 func NewJWT() *JwtWrapper {
 	jt := &JwtWrapper{

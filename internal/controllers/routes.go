@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	"commerce/internal/controllers/auth"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -11,7 +11,7 @@ import (
 // var r *gin.Engine
 
 // r.LoadHTMLGlob("static/*.html")
-//var static = r.Static("/static", "./static")
+// var static = r.Static("/static", "./static")
 
 func (s *Server) RouterHandler() *gin.Engine {
 	r := gin.Default()
@@ -19,7 +19,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 	//gin.SetMode(gin.ReleaseMode)
 	store := cookie.NewStore([]byte("secret"))
 	sessionNames := []string{"a"}
-	fmt.Println(sessionNames)
+	// fmt.Println(sessionNames)
 	r.Use(sessions.SessionsMany(sessionNames, store))
 
 	r.LoadHTMLGlob("static/*.html") //we can load from anywhere
@@ -34,7 +34,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 	r.GET("/", s.Home)
 	r.POST("/user/login", s.loginUser)
 	r.GET("/logout", s.Logout)
-	//r.GET("/login", s.Login)
+	r.GET("/login", s.Login)
 	//r.POST("/rest/login", s.RestLogin)
 	r.POST("/loginauth", s.LoginAuth)
 	// r.POST("/rest/loginauth/", s.RestLoginAuth)
@@ -48,9 +48,9 @@ func (s *Server) RouterHandler() *gin.Engine {
 	r.GET("/addproduct", s.AddProduct)
 	r.POST("/create", s.Create)
 	r.DELETE("/product/:id", s.Delete)
-	// r.POST("/create", s.CreateToken)
-	// rest API
 
+	authRoutes := r.Group("/").Use(auth.AuthMiddleware(s.TokenMaker))
+	authRoutes.GET("/test/:id", s.RestProduct)
 	r.GET("/rest/product/:id", s.RestProduct)
 	r.POST("/rest/create", s.RestCreate)
 	r.PUT("/rest/product/:id", s.RestDelete)

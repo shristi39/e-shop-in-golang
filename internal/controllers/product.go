@@ -89,6 +89,8 @@ func (s *Server) Create(c *gin.Context) {
 
 	// sessionA := sessions.DefaultMany(c, "a")
 	// data := sessionA.Get("user")
+	fmt.Println("im here")
+
 	image := c.PostForm("image")
 	name := c.PostForm("name")
 	description := c.PostForm("Description")

@@ -52,7 +52,7 @@ func (d *Repository) Register(name string, email string, password string) error 
 
 func (d *Repository) Login(email string, password string) error {
 	Hashvalue := Hash(password)
-	fmt.Println("......................Auth............", Hashvalue)
+	// fmt.Println("......................Auth............", Hashvalue)
 	user := User{}
 	err := d.DB.Model(&user).Where("email = ?", email).Where("password=?", Hashvalue).Find(&user).Error
 
@@ -60,4 +60,14 @@ func (d *Repository) Login(email string, password string) error {
 		return err
 	}
 	return nil
+}
+
+func (d *Repository) Deleteuser(id int) error {
+	User := User{}
+	err := d.DB.Model(&User).Where("id=?", id).Delete(&User).Error
+	if err != nil {
+		return err
+	}
+	return nil
+
 }
