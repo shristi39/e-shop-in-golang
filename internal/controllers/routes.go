@@ -59,7 +59,7 @@ func (s *Server) RouterHandler() *gin.Engine {
 
 	//  sabaie rest api ko yeha hunxa ,,,,,,,,login ko register product id ko get post ra put matra hunxa and checkout matra ho chaiyene ab
 
-	r.Run(":8001")
+	r.Run(":7004")
 
 	return r
 }
