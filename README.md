@@ -1,5 +1,5 @@
 # E-COMMERCE
-It is an dynamic website,where user can buy and add the product.This site mainly consicts of the server,client and database where,
+It is an dynamic website,where user can buy and add the product.This site mainly consists of the server,client and database where,
 - Server-side : Golang
 - Client-side : html, css,bootstrap 
 - Database: Sqlite
@@ -16,7 +16,7 @@ For the developement of this website we need certain package which should be be 
 6. For session ```github.com/gin-contrib/sessions```
 
 
-We have also created docker image of this project.Doocker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.
+We have also created docker image of this project.Docker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.
 
 Steps for dockerizing the project to the docker images are-
 
@@ -25,30 +25,30 @@ Steps for dockerizing the project to the docker images are-
 3. In the terminal run some  docker command .
 
         In the terminal run the following commands to create the docker image .
-        i) $ docker build -t (image name) .
-        ii) $ docker image ls
-        iii) $ docker run -p (port name here ....:....) -it (image name)
+        step 1-  docker build -t (image name) .
+        step 2-docker image ls
+        step 3- docker run -p (port name here ....:....) -it (image name)
 
     
-### we can run this website in terminal through the command [go run main.go] OR we can also do [$ docker run -p (port name here ....:....) -it (image name)]
+ we can run this website in terminal through the command [go run main.go] OR we can also do [ docker run -p (port) -it (image name)]
  
  ## Features and  Api
  ### User Api
-| Api  |Description   |   |   |   |
-|---|---|---|---|---|
-|Register   |To register new user    |
+| Api  |Description 
+|---|---
+|Register   |To register new user   
 |Loginuser|To generate the token right after login
 |Login   |To login existing user   
 |Logout   |for logout   
-|Login auth |To check session
+
 
 ### Product Api
 
-| Api   |Description   |   |   |   |
-|---|---|---|---|---|
-|Create   | To create product  |   |   |   |
-|Delete   | It is for deleteing product  |   |   |   |
-|Update   | To update  |   |   |   |
+| Api   |Description   |   
+|---|---
+|Create   | To create product  | 
+|Delete   | It is for deleteing product  |   
+|Update   | To update  |   
 |Checkout|To check out from cart
 |Product|To view the product details
 |Addproduct|To add product from the user side
@@ -69,7 +69,7 @@ login page
 ![login page](/ecommerce_image/login.png)
 
 
-## Tested 
+## Test coverage
 
 Models  test 
 ![models test](/ecommerce_image/modelstest.png)
