@@ -5,7 +5,7 @@ It is an dynamic website,where user can buy and add the product.This site mainly
 - Database: Sqlite
 
 ## Application Requirement
-       For the developement of this website we need certain package which should be be install our website.For that we should get those package and run the command go get (package url), and then go mod init and finally go mod tidy. The packages we need are listed below-
+       For the developement of this website we need certain package which should be be installed.For that we should get those package and run the command go get (package url), and then go mod init and finally go mod tidy. The packages we need are listed below-
 
 1. For  Golang https://go.dev/dl/
 2. For  Gorilla/mux package for router ```go get github.com/gorilla/mux```
@@ -15,6 +15,7 @@ It is an dynamic website,where user can buy and add the product.This site mainly
 5. For tests ```go get github.com/golang/mock/gomock```
 6. For session ```github.com/gin-contrib/sessions```
 
+
 We have also created docker image of this project.Doocker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.
 
 Steps for dockerizing the project to the docker images are-
@@ -22,13 +23,39 @@ Steps for dockerizing the project to the docker images are-
 1. Create the docker file outside the controllers and models.
 2. Inside that dockerfile write some code and save that file
 3. In the terminal run some  docker command .
+
+        In the terminal run the following commands to create the docker image .
+        i) $ docker build -t (image name) .
+        ii) $ docker image ls
+        iii) $ docker run -p (port name here ....:....) -it (image name)
+
     
-
+### we can run this website in terminal through the command [go run main.go] OR we can also do [$ docker run -p (port name here ....:....) -it (image name)]
  
- ## Used Api
+ ## Features and  Api
+ ### User Api
+| Api  |Description   |   |   |   |
+|---|---|---|---|---|
+|Register   |To register new user    |
+|Loginuser|To generate the token right after login
+|Login   |To login existing user   
+|Logout   |for logout   
+|Login auth |To check session
 
-We used different api for the different operation  in this project there are also the rest pi which prerform their task.
-To GET(product,login,logout,create,updatecart,register,checkout)to POST(login user) to DELETE(delete).....These are the api that has been used.
+### Product Api
+
+| Api   |Description   |   |   |   |
+|---|---|---|---|---|
+|Create   | To create product  |   |   |   |
+|Delete   | It is for deleteing product  |   |   |   |
+|Update   | To update  |   |   |   |
+|Checkout|To check out from cart
+|Product|To view the product details
+|Addproduct|To add product from the user side
+
+
+
+
 
 ## Preview
 
