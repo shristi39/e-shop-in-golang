@@ -21,7 +21,7 @@ We have also created docker image of this project.Docker is a platform for manag
 Steps for dockerizing the project to the docker images are-
 
 1. Create the docker file outside the controllers and models.
-2. Inside that dockerfile write some code and save that file
+2. Inside that dockerfile write code and save that file
 3. In the terminal run some  docker command .
 
         In the terminal run the following commands to create the docker image .
@@ -30,7 +30,7 @@ Steps for dockerizing the project to the docker images are-
         step 3- docker run -p (port name here ....:....) -it (image name)
 
     
- we can run this website in terminal through the command [go run main.go] OR we can also do [ docker run -p (port) -it (image name)]
+ we can run this website in terminal through the command [go run main.go] or we can also do [ docker run -p (port) -it (image name)]
  
  ## Features and  Api
  ### User Api
