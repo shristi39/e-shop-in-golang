@@ -5,7 +5,7 @@ It is an dynamic website,where user can buy and add the product.This site mainly
 - Database: Sqlite
 
 ## Application Requirement
-       For the developement of this website we need certain package which should be be installed.For that we should get those package and run the command go get (package url), and then go mod init and finally go mod tidy. The packages we need are listed below-
+For the developement of this website we need certain package which should be be installed.For that we should get those package and run the command go get (package url), and then go mod init and finally go mod tidy. The packages we need are listed below-
 
 1. For  Golang https://go.dev/dl/
 2. For  Gorilla/mux package for router ```go get github.com/gorilla/mux```
