@@ -1,11 +1,11 @@
 # E-COMMERCE
-E-commerce is also known as the electronic commerce.It is an dynamic website,where user can buy and add the product after the login. User should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.
+E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after the login. User should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.Customers access an online store to browse through and place orders for products or services via their own devices.It is business to customer.
 ### What  It solves?
-It solves the  problem of where the people and one can find any necessary things within the site with a click.During these kind of panedemic it will easy the people by which they shouldn't interact with the people.
+It solves the  problem of where the people can connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere in anyconditions.They doesnt have to interact with the people and can be suitable in pandemic situations.
 ## Technology stacks
 There is client and server side in our website where 
  
- 1 .CLient-side:Html,css,bootstrap
+ 1 .Client-side:Html,css,bootstrap
 
 2 .Server-side:Golang
 
@@ -21,14 +21,15 @@ We have develope this website using the golang language.you can get the go packa
 
  We also have created the mock file for the testing the coverage of the packages and functions the package we used for creating the mock file is (https://github.com/golang/mock)
 
- wWe have used the gorm for the query and to  manipulate data from a database using an object-oriented paradigm(https://github.com/jinzhu/gorm)
+ We have used the gorm for the query and to  manipulate data from a database using an object-oriented paradigm(https://github.com/jinzhu/gorm)
 
 We have also created docker image of this project.Docker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.We can get the information on building the image on(https://docs.docker.com/)
 
 Steps for dockerizing the project to the docker images are-
 
 1. Create the docker file outside the controllers and models.
-2. Inside that dockerfile write code(where we include  FROM golang:1.16
+2. Inside that dockerfile write code(where we include 
+ FROM golang:1.16
 
     WORKDIR /app
 
@@ -40,6 +41,15 @@ Steps for dockerizing the project to the docker images are-
 ) and save that file
 
 3. In the terminal run some  docker command .
+
+In the terminal run the following commands to create the docker image .
+ 
+ step 1-  docker build -t (image name) .
+ 
+ step 2-docker image ls
+ 
+ step 3- docker run -p (port name here ....:....) -it (image name)
+
 
 ## Running Instruction
 
