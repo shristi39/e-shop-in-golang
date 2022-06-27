@@ -1,57 +1,71 @@
 # E-COMMERCE
-It is an dynamic website,where user can buy and add the product.This site mainly consists of the server,client and database where,
-- Server-side : Golang
-- Client-side : html, css,bootstrap 
-- Database: Sqlite
+E-commerce is also known as the electronic commerce.It is an dynamic website,where user can buy and add the product after the login. User should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.
+### What  It solves?
+It solves the  problem of where the people and one can find any necessary things within the site with a click.During these kind of panedemic it will easy the people by which they shouldn't interact with the people.
+## Technology stacks
+There is client and server side in our website where 
+ 
+ 1 .CLient-side:Html,css,bootstrap
 
-## Application Requirement
-For the developement of this website we need certain package which should be be installed.For that we should get those package and run the command go get (package url), and then go mod init and finally go mod tidy. The packages we need are listed below-
+2 .Server-side:Golang
 
-1. For  Golang https://go.dev/dl/
-2. For  Gorilla/mux package for router ```go get github.com/gorilla/mux```
-3. Gorm package for connecting to database ```go get github.com/jinzhu/gorm```
- 4. For sqlite ```go get github.com/jinzhu/gorm/dialects/sqlite```
-4. For token jwt ```github.com/dgrijalva/jwt-go```
-5. For tests ```go get github.com/golang/mock/gomock```
-6. For session ```github.com/gin-contrib/sessions```
+## Setup Instruction
+We have develope this website using the golang language.you can get the go package in(https://go.dev/dl/).We have done it in the vesion go 1.16, but  haven't tested in any other version.
+
+ We have  use the gorilla/mux packages for the router. Gorilla/mux basically implements a request router and dispatcher for matching incoming requests to their respective handler.you can get the package in (https://github.com/gorilla/mux).
+ 
+ We have also used the token that is generated during the login,we used the jwt token ,we can get the package in (https://github.com/dgrijalva/jwt-go).
+
+ We have also used the session in this site where the login info is saved after the registration for this we used the session packages that is available for golang the used package is (https://github.com/gin-contrib/sessions).
 
 
-We have also created docker image of this project.Docker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.
+ We also have created the mock file for the testing the coverage of the packages and functions the package we used for creating the mock file is (https://github.com/golang/mock)
+
+ wWe have used the gorm for the query and to  manipulate data from a database using an object-oriented paradigm(https://github.com/jinzhu/gorm)
+
+We have also created docker image of this project.Docker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.We can get the information on building the image on(https://docs.docker.com/)
 
 Steps for dockerizing the project to the docker images are-
 
 1. Create the docker file outside the controllers and models.
-2. Inside that dockerfile write code and save that file
+2. Inside that dockerfile write code(where we include  FROM golang:1.16
+
+    WORKDIR /app
+
+    ADD . .
+
+   RUN go build -o main .
+
+   CMD /app/main
+) and save that file
+
 3. In the terminal run some  docker command .
 
-        In the terminal run the following commands to create the docker image .
-        step 1-  docker build -t (image name) .
-        step 2-docker image ls
-        step 3- docker run -p (port name here ....:....) -it (image name)
+## Running Instruction
 
-    
- we can run this website in terminal through the command [go run main.go] or we can also do [ docker run -p (port) -it (image name)]
+When we finish setting the required package and instruction after that we can run the code by (go run main.go)or 
+we can run this website in terminal through the command [ docker run -p (port) -it (image name)]
  
  ## Features and  Api
  ### User Api
 | Api  |Description 
 |---|---
-|Register   |To register new user   
-|Loginuser|To generate the token right after login
-|Login   |To login existing user   
-|Logout   |for logout   
+|r.GET"/register"  |When there comes the new user  at first they register during this api wil call and registration form will appear 
+|r.POST"/register"|After the registration there comes the data and this api will call which checks either the name,email,password match the given security conditions if it matches then it will redirect to the home page or it will show the unsuccesful message.
+|r.POST"/user/login"|This api will be called after login and by calling this api there will generate the user token. 
+|r.GET"/login" |When the existing and registered user signin this api will called and user get logined if the login info is incorrect then their appear the unsuccesful message.
+|r.GET"/logout"  |This api will call when the existing user will logout from  the site  
 
 
 ### Product Api
 
 | Api   |Description   |   
 |---|---
-|Create   | To create product  | 
-|Delete   | It is for deleteing product  |   
-|Update   | To update  |   
-|Checkout|To check out from cart
-|Product|To view the product details
-|Addproduct|To add product from the user side
+|r.POST"/create"   | This api will called to create the product from the postman | 
+|r.DELETE"/Delete"   | When we have to delete the product we call this api in order to d delete the product.we delete the product from the postman by providing the product details. |   
+|r.Get"/checkout| This api is called when the user checksout from the cart 
+|r.GET"/poduct/:id"|To view the product details from the product id.when the user click the view product then this api will respond according and show the product details.
+|r.GET"/Addproduct"|When the user logedin then there comes the add sign from which user can add the product accordingly,when the user submit the this api will called and the product will be addedand shown in the home page
 
 
 
