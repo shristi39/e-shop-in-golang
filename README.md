@@ -1,7 +1,7 @@
 # E-COMMERCE
-E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after the login. User should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.Customers access an online store to browse through and place orders for products or services via their own devices.It is business to customer.
+E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after they logednUser should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.Customers access an online store to browse through and place orders for products or services via their own ices.It is business to customer.
 ### What  It solves?
-It solves the  problem of where the people can connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere in anyconditions.They doesnt have to interact with the people and can be suitable in pandemic situations.
+It solves the  problem of where the people can get to connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere in anyconditions.They doesnt have to interact with the people and this site  can be suitable in pandemic situations.
 ## Technology stacks
 There is client and server side in our website where 
  
@@ -10,7 +10,7 @@ There is client and server side in our website where
 2 .Server-side:Golang
 
 ## Setup Instruction
-We have develope this website using the golang language.you can get the go package in(https://go.dev/dl/).We have done it in the vesion go 1.16, but  haven't tested in any other version.
+We have develop this website using the golang language.you can get the go package in(https://go.dev/dl/). We have done it in the vesion go 1.16, but  haven't tested in any other version.
 
  We have  use the gorilla/mux packages for the router. Gorilla/mux basically implements a request router and dispatcher for matching incoming requests to their respective handler.you can get the package in (https://github.com/gorilla/mux).
  
