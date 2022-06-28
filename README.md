@@ -1,7 +1,7 @@
 ### E-COMMERCE
 E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after they logined .User should register first before they login.They should create the new account.We can add the product from the site and from the api as well.Customers access an online store to browse through and place orders for products or services via their own choices.It is business to customer.
-### What  It solves?
-It solves the  problem of where the people can get to connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere where the internet is accesible.They doesnt have to interact with the people and this site  can be suitable in pandemic situations.
+### What this site?
+ People can get to connect direct  and one can find any necessary things within the site with a click.They can do shopping from the browser from anywhere where the internet is accesible.They doesnt have to interact with the people and this kind of  site  can be suitable in pandemic situations.
 ## Technology stacks
 There is client and server side in our website where 
  
