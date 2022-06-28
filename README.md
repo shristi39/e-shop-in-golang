@@ -32,26 +32,29 @@ Steps for dockerizing the project to the docker images are-
 1. Create the docker file outside the controllers and models.
 2. Inside that dockerfile write code(where we include 
 
-   FROM golang:1.16 
+  .. 
 
+    FROM golang.16
+   
     WORKDIR /app 
 
     ADD . .
 
-   RUN go build -o main .
+    RUN go build -o main .
 
-   CMD /app/main
+    CMD /app/main
 ) and save that file
 
 3. In the terminal run some  docker command .
 
 In the terminal run the following commands to create the docker image .
+
+      
+      step 1-  docker build -t (image name) .
  
- step 1-  docker build -t (image name) .
+      step 2-docker image ls
  
- step 2-docker image ls
- 
- step 3- docker run -p (port name here ....:....) -it (image name)
+      step 3- docker run -p (port name here ....:....) -it (image name)
 
 
 ## Running Instruction
