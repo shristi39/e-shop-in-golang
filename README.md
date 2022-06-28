@@ -78,7 +78,7 @@ we can run this website in terminal through the command [ docker run -p (port) -
 |r.DELETE"/Delete"   | When we have to delete the product we call this api in order to d delete the product.we delete the product from the postman by providing the product details. |   
 |r.Get"/checkout| This api is called when the user checksout from the cart 
 |r.GET"/poduct/:id"|To view the product details from the product id.when the user click the view product then this api will respond according and show the product details.
-|r.GET"/Addproduct"|When the user logedin then there comes the add sign from which user can add the product accordingly,when the user submit the this api will called and the product will be addedand shown in the home page
+|r.GET"/addproduct"|When the user logedin then there comes the add sign from which user can add the product accordingly,when the user submit the this api will called and the product will be addedand shown in the home page
 
 
 
