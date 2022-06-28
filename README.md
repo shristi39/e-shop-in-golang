@@ -1,7 +1,7 @@
-# E-COMMERCE
-E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after they logednUser should register first before the login.They should create the new account.We can add the product from the site and from the rest api as well.Customers access an online store to browse through and place orders for products or services via their own ices.It is business to customer.
+### E-COMMERCE
+E-commerce is also known as the electronic commerce.It is an  complete dynamic website,where user can buy and add the product after they logined .User should register first before they login.They should create the new account.We can add the product from the site and from the api as well.Customers access an online store to browse through and place orders for products or services via their own choices.It is business to customer.
 ### What  It solves?
-It solves the  problem of where the people can get to connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere in anyconditions.They doesnt have to interact with the people and this site  can be suitable in pandemic situations.
+It solves the  problem of where the people can get to connect direct  and one can find any necessary things within the site just a click.They can do shopping from the browser from anywhere where the internet is accesible.They doesnt have to interact with the people and this site  can be suitable in pandemic situations.
 ## Technology stacks
 There is client and server side in our website where 
  
@@ -9,8 +9,10 @@ There is client and server side in our website where
 
 2 .Server-side:Golang
 
+
+
 ## Setup Instruction
-We have develop this website using the golang language.you can get the go package in(https://go.dev/dl/). We have done it in the vesion go 1.16, but  haven't tested in any other version.
+We have develop this website using the golang language.you can get the go package in(https://go.dev/dl/). We have done it in the version go 1.16, but  haven't tested in any other version.
 
  We have  use the gorilla/mux packages for the router. Gorilla/mux basically implements a request router and dispatcher for matching incoming requests to their respective handler.you can get the package in (https://github.com/gorilla/mux).
  
@@ -21,7 +23,7 @@ We have develop this website using the golang language.you can get the go packag
 
  We also have created the mock file for the testing the coverage of the packages and functions the package we used for creating the mock file is (https://github.com/golang/mock)
 
- We have used the gorm for the query and to  manipulate data from a database using an object-oriented paradigm(https://github.com/jinzhu/gorm)
+The GORM is fantastic ORM library for Golang, aims to be developer friendly. It is an ORM library for dealing with relational databases. This gorm library is developed on the top of database/sql package. We have used the gorm for the query and to  manipulate data from a database using an object-oriented paradigm(https://github.com/jinzhu/gorm)
 
 We have also created docker image of this project.Docker is a platform for managing ,deploying and building the containerized applications.It comes with the command line interface using which we can do all the operations which the website provides.We can get the information on building the image on(https://docs.docker.com/)
 
@@ -29,9 +31,10 @@ Steps for dockerizing the project to the docker images are-
 
 1. Create the docker file outside the controllers and models.
 2. Inside that dockerfile write code(where we include 
- FROM golang:1.16
 
-    WORKDIR /app
+   FROM golang:1.16 
+
+    WORKDIR /app 
 
     ADD . .
 
@@ -61,7 +64,7 @@ we can run this website in terminal through the command [ docker run -p (port) -
 | Api  |Description 
 |---|---
 |r.GET"/register"  |When there comes the new user  at first they register during this api wil call and registration form will appear 
-|r.POST"/register"|After the registration there comes the data and this api will call which checks either the name,email,password match the given security conditions if it matches then it will redirect to the home page or it will show the unsuccesful message.
+|r.POST"/register"|After the registration there comes the data in the POST form and this api will call which checks either the name,email,password match the given security conditions if it matches then it will redirect to the home page or it will show the unsuccesful message.
 |r.POST"/user/login"|This api will be called after login and by calling this api there will generate the user token. 
 |r.GET"/login" |When the existing and registered user signin this api will called and user get logined if the login info is incorrect then their appear the unsuccesful message.
 |r.GET"/logout"  |This api will call when the existing user will logout from  the site  
